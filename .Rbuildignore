@@ -3,3 +3,5 @@
 ^LICENSE\.md$
 ^\.Rbuildignore$
 ^README\.Rmd$
+^\.github$
+^cran-comments\.md$
