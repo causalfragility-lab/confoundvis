@@ -233,4 +233,4 @@ citation("confoundvis")
 
 ## License
 
-GPL-3. See [LICENSE](LICENSE) for details.   
+GPL-3. See [LICENSE](LICENSE) for details.
