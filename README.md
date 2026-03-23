@@ -1,4 +1,4 @@
- # confoundvis
+# confoundvis
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/causalfragility-lab/confoundvis/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/causalfragility-lab/confoundvis/actions/workflows/R-CMD-check.yaml)
