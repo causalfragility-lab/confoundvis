@@ -24,7 +24,7 @@ Description: Provides visualization tools for sensitivity analysis to
     publication-ready graphical summaries for transparent reporting of
     causal sensitivity analyses across the social, behavioral, health,
     and educational sciences.
-License: GPL-3 + file LICENSE
+License: GPL-3 
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)

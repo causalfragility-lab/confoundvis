@@ -1,4 +1,4 @@
- ## Test environments
+## Test environments
 * local Windows 11, R 4.5.1
 * win-builder R-devel (2026-03-22)
 * win-builder R-release (R 4.5.3)
@@ -13,5 +13,9 @@
   surnames in cited references, not misspellings.
 * "Non-standard file cran-comments.md": added to .Rbuildignore.
 
-## New submission
-First submission to CRAN.
+## Resubmission
+This is a resubmission following review by Uwe Ligges.
+
+* Changed License field from "GPL-3 + file LICENSE" to "GPL-3"
+* Removed the LICENSE file as it contained no additional restrictions
+  beyond the standard GPL-3 terms
