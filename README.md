@@ -1,37 +1,29 @@
-# confoundvis
+# confoundvis <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 <!-- badges: start -->
+
 [![R-CMD-check](https://github.com/causalfragility-lab/confoundvis/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/causalfragility-lab/confoundvis/actions/workflows/R-CMD-check.yaml)
+[![License:
+GPL-3](https://img.shields.io/badge/License-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 <!-- badges: end -->
 
-**confoundvis** provides visualization tools for sensitivity analysis to
-unmeasured confounding in observational studies. It helps researchers assess
-how strong omitted confounding would need to be to attenuate, invalidate, or
-reverse estimated causal effects — and communicate those findings through
-clear, publication-ready graphics.
+## Overview
 
-The package supports three major sensitivity frameworks:
+`confoundvis` is an R package for visualizing sensitivity analysis to
+unmeasured confounding in observational studies. It implements
+visualization tools for three major sensitivity frameworks — the
+**Impact Threshold** (Frank, 2000), **Partial R-squared / Robustness
+Value** (Cinelli & Hazlett, 2020), and **E-value style metrics**
+(VanderWeele & Ding, 2017) — helping researchers assess how strong
+omitted confounding would need to be to attenuate, invalidate, or
+reverse an estimated causal effect, and communicate those findings
+through clear, publication-ready graphics.
 
-- **Impact threshold** (Frank, 2000)
-- **Partial R-squared / robustness value** (Cinelli & Hazlett, 2020)
-- **E-value style metrics** (VanderWeele & Ding, 2017)
+Core functions:
 
----
-
-## Installation
-
-Install the development version from GitHub:
-```r
-# install.packages("pak")
-pak::pak("causalfragility-lab/confoundvis")
-```
-
----
-
-## Core Functions
-
-| Function | Purpose |
-|---|---|
+| Function | Description |
+|----|----|
 | `new_confoundsens()` | Construct a sensitivity analysis object |
 | `plot_sensitivity_contour()` | Contour plot of robustness values |
 | `plot_robustness_curve()` | Robustness curve across effect sizes |
@@ -40,45 +32,92 @@ pak::pak("causalfragility-lab/confoundvis")
 | `fit_local_quadratic()` | Fit local quadratic to sensitivity path |
 | `simulate_taylor_demo()` | Simulate data for Taylor approximation demos |
 
----
+## Installation
 
-## Example: Sensitivity Contour Plot
-```r
-library(confoundvis)
+Install the development version from GitHub:
 
-obj <- new_confoundsens(
-  estimate        = 0.5,
-  se              = 0.1,
-  df              = 200,
-  r2dz_x          = seq(0.01, 0.4, by = 0.01),
-  r2yz_dx         = seq(0.01, 0.4, by = 0.01),
-  benchmark_r2dz  = 0.1,
-  benchmark_r2yz  = 0.15
-)
-
-plot_sensitivity_contour(obj)
+``` r
+# install.packages("pak")
+pak::pak("causalfragility-lab/confoundvis")
 ```
 
----
+## Quick Start
 
-## Example: Taylor Approximation Bias Across Window Widths
+``` r
+library(confoundvis)
 
-The simulation below illustrates how local quadratic approximation
-consistently outperforms simple tangent (first-order) approximation as the
-local window widens — especially when the true sensitivity path has curvature.
-```r
+# Construct a sensitivity analysis object
+obj <- new_confoundsens(
+  estimate       = 0.5,
+  se             = 0.1,
+  df             = 200,
+  r2dz_x         = seq(0.01, 0.4, by = 0.01),
+  r2yz_dx        = seq(0.01, 0.4, by = 0.01),
+  benchmark_r2dz = 0.1,
+  benchmark_r2yz = 0.15
+)
+
+# Contour plot of robustness values
+plot_sensitivity_contour(obj)
+
+# Robustness curve across effect sizes
+plot_robustness_curve(obj)
+
+# Love-plot style sensitivity display
+plot_sensitivity_love(obj)
+
+# Local Taylor approximation
+plot_local_taylor(obj)
+```
+
+## Plot Methods
+
+``` r
+# Contour plot
+plot_sensitivity_contour(obj)
+
+# Robustness curve
+plot_robustness_curve(obj)
+
+# Love plot
+plot_sensitivity_love(obj)
+
+# Taylor approximation
+plot_local_taylor(obj)
+```
+
+## Sensitivity Frameworks
+
+The package operationalises three sensitivity frameworks:
+
+| Framework | Reference | Key Quantity |
+|----|----|----|
+| Impact threshold | Frank (2000) | % cases that must be replaced to nullify effect |
+| Partial R-squared / Robustness value | Cinelli & Hazlett (2020) | R² of confounder with treatment and outcome |
+| E-value style metrics | VanderWeele & Ding (2017) | Minimum confounding risk ratio to explain away effect |
+
+## Simulation Results
+
+### Taylor Approximation Bias Across Window Widths
+
+A simulation with `theta0 = 0.5`, `slope = -0.7`, `kappa3 = 0.6`, and
+window widths `w ∈ {0.05, 0.1, 0.2, 0.3, 0.4, 0.5}` confirms that
+local quadratic approximation consistently outperforms first-order
+(tangent) approximation as the local window widens.
+
+``` r
 library(confoundvis)
 library(ggplot2)
 library(scales)
 
 set.seed(2025)
 
-theta0  <- 0.5
-slope   <- -0.7
-kappa3  <- 0.6
-windows <- c(0.05, 0.1, 0.2, 0.3, 0.4, 0.5)
+theta0     <- 0.5
+slope      <- -0.7
+kappa3     <- 0.6
+windows    <- c(0.05, 0.1, 0.2, 0.3, 0.4, 0.5)
 kappa_vals <- c(-0.4, 0, 0.4)
-delta   <- seq(0, 0.5, length.out = 1000)
+delta      <- seq(0, 0.5, length.out = 1000)
 
 results <- list()
 for (kap in kappa_vals) {
@@ -131,18 +170,17 @@ ggplot(df_long, aes(x = window, y = mae, color = type, linetype = type)) +
   )
 ```
 
-**Key finding:** Quadratic approximation yields substantially lower error than
-the tangent at every window width. Approximation error grows with window width,
-and curvature accelerates the deterioration of first-order linear approximation.
+**Key finding:** Quadratic approximation yields substantially lower
+error than the tangent at every window width. Approximation error grows
+with window width, and curvature accelerates the deterioration of
+first-order linear approximation.
 
----
+### Zero-Crossing Error Under Linearity Mis-specification
 
-## Example: Zero-Crossing Error Under Linearity Mis-specification
+When the true sensitivity path is nonlinear, using a linear
+approximation to locate the zero-crossing introduces systematic bias.
 
-When the true sensitivity path is nonlinear, using a linear approximation to
-locate the zero-crossing (the point at which confounding would nullify the
-effect) introduces systematic bias.
-```r
+``` r
 theta0_vals <- c(0.2, 0.4, 0.6)
 slope_vals  <- c(-0.3, -0.6, -0.9)
 kappa_vals2 <- seq(-0.6, 0.6, by = 0.2)
@@ -202,35 +240,38 @@ ggplot(df2, aes(x = kappa, y = error,
   )
 ```
 
-**Key finding:** Under concavity, linear approximation over-estimates the
-fragility threshold; under convexity, it under-estimates. The bias grows with
-both curvature magnitude and initial effect size.
-
----
+**Key finding:** Under concavity, linear approximation over-estimates
+the fragility threshold; under convexity, it under-estimates. The bias
+grows with both curvature magnitude and initial effect size.
 
 ## References
 
 - Frank, K. A. (2000). Impact of a confounding variable on a regression
   coefficient. *Sociological Methods & Research*, 29(2), 147–194.
-  https://doi.org/10.1177/0049124100029002001
+  <https://doi.org/10.1177/0049124100029002001>
 
-- Cinelli, C., & Hazlett, C. (2020). Making sense of sensitivity: Extending
-  omitted variable bias. *Journal of the Royal Statistical Society: Series B*,
-  82(1), 39–67. https://doi.org/10.1111/rssb.12348
+- Cinelli, C., & Hazlett, C. (2020). Making sense of sensitivity:
+  Extending omitted variable bias. *Journal of the Royal Statistical
+  Society: Series B*, 82(1), 39–67.
+  <https://doi.org/10.1111/rssb.12348>
 
-- VanderWeele, T. J., & Ding, P. (2017). Sensitivity analysis in observational
-  research: Introducing the E-value. *Annals of Internal Medicine*, 167(4),
-  268–274. https://doi.org/10.7326/M16-2607
-
----
+- VanderWeele, T. J., & Ding, P. (2017). Sensitivity analysis in
+  observational research: Introducing the E-value. *Annals of Internal
+  Medicine*, 167(4), 268–274. <https://doi.org/10.7326/M16-2607>
 
 ## Citation
-```r
+
+``` r
 citation("confoundvis")
 ```
 
----
+> Hait, S. (2025). *confoundvis: Visualization Tools for Sensitivity
+> Analysis to Unmeasured Confounding*. R package version 0.1.0.
+> <https://github.com/causalfragility-lab/confoundvis>
 
-## License
+## Author
 
-GPL-3. See [LICENSE](LICENSE) for details.
+**Subir Hait**\
+Michigan State University\
+<haitsubi@msu.edu>\
+ORCID: [0009-0004-9871-9677](https://orcid.org/0009-0004-9871-9677)
