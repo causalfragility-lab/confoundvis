@@ -269,13 +269,31 @@ grows with both curvature magnitude and initial effect size.
 citation("confoundvis")
 ```
 
-> Hait, S. (2025). *confoundvis: Visualization Tools for Sensitivity
-> Analysis to Unmeasured Confounding*. R package version 0.1.0.
-> <https://github.com/causalfragility-lab/confoundvis>
+## 📌 Citation
+
+To cite `confoundvis` in publications:
+
+> Hait, S. (2026). *confoundvis: Visualization Tools for Sensitivity Analysis to Unmeasured Confounding* (Version 0.1.0). CRAN.  
+> https://CRAN.R-project.org/package=confoundvis  
+> https://doi.org/10.32614/CRAN.package.confoundvis
+
+You can also generate the citation directly in R:
+
+```r
+citation("confoundvis")
 
 ## Author
-
 **Subir Hait**\
 Michigan State University\
 <haitsubi@msu.edu>\
 ORCID: [0009-0004-9871-9677](https://orcid.org/0009-0004-9871-9677)
+
+---
+
+This version is:
+- consistent with CRAN release (2026)
+- DOI-ready
+- clean for GitHub rendering
+- appropriate for academic citation
+
+If you want next, I can align this with your **app (Zenodo DOI)** so both read like one unified research system.
