@@ -96,6 +96,10 @@ The package operationalises three sensitivity frameworks:
 | Partial R-squared / Robustness value | Cinelli & Hazlett (2020) | R² of confounder with treatment and outcome |
 | E-value style metrics | VanderWeele & Ding (2017) | Minimum confounding risk ratio to explain away effect |
 
+## Theoretical Extension
+
+Beyond these established sensitivity frameworks, `confoundvis` implements a differential sensitivity perspective for unobserved confounding (Hait, in preparation), which reconceptualizes robustness as a local geometric property of the confounding path. This approach extends classical threshold-based diagnostics by introducing local sensitivity slopes, curvature, and cumulative fragility as core features of robustness analysis.
+
 ## Simulation Results
 
 ### Taylor Approximation Bias Across Window Widths
