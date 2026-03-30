@@ -290,10 +290,4 @@ ORCID: [0009-0004-9871-9677](https://orcid.org/0009-0004-9871-9677)
 
 ---
 
-This version is:
-- consistent with CRAN release (2026)
-- DOI-ready
-- clean for GitHub rendering
-- appropriate for academic citation
 
-If you want next, I can align this with your **app (Zenodo DOI)** so both read like one unified research system.
