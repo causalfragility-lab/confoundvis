@@ -264,14 +264,13 @@ grows with both curvature magnitude and initial effect size.
   Medicine*, 167(4), 268–274. <https://doi.org/10.7326/M16-2607>
 
 ## Citation
+You can also obtain the recommended citation directly in R:
 
 To cite `confoundvis` in publications:
 
 > Hait, S. (2026). *confoundvis: Visualization Tools for Sensitivity Analysis to Unmeasured Confounding* (Version 0.1.0). CRAN.  
 > https://CRAN.R-project.org/package=confoundvis  
 > https://doi.org/10.32614/CRAN.package.confoundvis
-
-You can also generate the citation directly in R:
 
 ```r
 citation("confoundvis")
