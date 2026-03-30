@@ -265,12 +265,6 @@ grows with both curvature magnitude and initial effect size.
 
 ## Citation
 
-``` r
-citation("confoundvis")
-```
-
-## 📌 Citation
-
 To cite `confoundvis` in publications:
 
 > Hait, S. (2026). *confoundvis: Visualization Tools for Sensitivity Analysis to Unmeasured Confounding* (Version 0.1.0). CRAN.  
@@ -283,11 +277,11 @@ You can also generate the citation directly in R:
 citation("confoundvis")
 
 ## Author
-**Subir Hait**\
-Michigan State University\
-<haitsubi@msu.edu>\
-ORCID: [0009-0004-9871-9677](https://orcid.org/0009-0004-9871-9677)
+ Subir Hait
+Michigan State University
+Email: haitsubi@msu.edu
 
+ORCID: https://orcid.org/0009-0004-9871-9677
 ---
 
 
